@@ -1,8 +1,3 @@
-
-Athenkosi Mdebuka <athenkosimdebuka44@gmail.com>
-10:19 (0 minutes ago)
-to me
-
 public class PayNestApplication {
 
 public static void main(String[] args) {
