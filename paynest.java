@@ -1,3 +1,4 @@
+
 //Product catalogue
 //Product class
 public class Product {
