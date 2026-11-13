@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.List;
 
+
+
 public class Order {
 
 private int id;
@@ -43,5 +45,13 @@ item.calculateTotal()
 }
 
 System.out.println("Total: R" + calculateTotal());
+}
+
+public boolean checkout(PaymentMethod paymentMethod) {
+double total = calculateTotal();
+
+PaymentProcessor processor = new PaymentProcessor();
+
+return processor.processPayment(paymentMethod, total);
 }
 }

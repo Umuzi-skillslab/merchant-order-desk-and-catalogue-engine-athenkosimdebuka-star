@@ -1,0 +1,16 @@
+
+public class EftPayment implements PaymentMethod {
+
+@Override
+public boolean processPayment(double amount) {
+System.out.println("Processing EFT payment for R"
++ String.format("%.2f", amount));
+
+return true;
+}
+
+@Override
+public String getPaymentType() {
+return "EFT";
+}
+}

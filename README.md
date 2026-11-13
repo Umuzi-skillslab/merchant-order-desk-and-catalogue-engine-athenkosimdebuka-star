@@ -82,3 +82,40 @@ The program displays:
 ## Author
 
 Athenkosi Mdebuka
+
+## Capstone 3 - Unified Checkout Across Payment Rails
+
+### Project Description
+
+This project extends the Merchant Order Desk and Catalogue Engine
+with a unified checkout system that supports multiple payment methods.
+
+### Supported Payment Methods
+
+- Card Payment
+- EFT Payment
+- Wallet Payment
+
+All payment methods implement the PaymentMethod interface.
+The Order class calculates the order total and passes it
+to the selected payment method through checkout.
+
+### Payment Validation
+
+The application validates payment amounts and includes
+payment-specific validation such as card CVV validation
+and wallet balance validation.
+
+### Testing
+
+JUnit tests cover:
+- Invalid and negative payment amounts
+- Valid and invalid card CVV
+- EFT payment processing
+- Wallet payment with insufficient balance
+
+### Technologies
+
+- Java
+- Maven
+- JUnit 5
