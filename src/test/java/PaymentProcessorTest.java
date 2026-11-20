@@ -25,22 +25,25 @@ assertFalse(result);
 }
 
 @Test
-void testInvalidCvv() {
-CardPayment cardPayment = new CardPayment("999");
+void testProcessorRejectsInvalidCvv() {
+PaymentProcessor processor = new PaymentProcessor();
+PaymentMethod paymentMethod = new CardPayment("999");
 
-boolean result = cardPayment.processPayment(100);
+boolean result = processor.processPayment(paymentMethod, 100);
 
 assertFalse(result);
 }
 
 @Test
-void testValidCvv() {
-CardPayment cardPayment = new CardPayment("123");
+void testProcessorAcceptsValidCvv() {
+PaymentProcessor processor = new PaymentProcessor();
+PaymentMethod paymentMethod = new CardPayment("123");
 
-boolean result = cardPayment.processPayment(100);
+boolean result = processor.processPayment(paymentMethod, 100);
 
 assertTrue(result);
 }
+
 @Test
 void testEftPayment() {
 PaymentProcessor processor = new PaymentProcessor();
@@ -50,6 +53,7 @@ boolean result = processor.processPayment(paymentMethod, 100);
 
 assertTrue(result);
 }
+
 @Test
 void testWalletPaymentInsufficientBalance() {
 WalletPayment walletPayment = new WalletPayment(50);
@@ -58,5 +62,24 @@ boolean result = walletPayment.processPayment(100);
 
 assertFalse(result);
 assertEquals(50, walletPayment.getWalletBalance());
+}
+
+@Test
+void testWalletPaymentSuccessful() {
+WalletPayment walletPayment = new WalletPayment(200);
+
+boolean result = walletPayment.processPayment(100);
+
+assertTrue(result);
+assertEquals(100, walletPayment.getWalletBalance());
+}
+
+@Test
+void testNullPaymentMethod() {
+PaymentProcessor processor = new PaymentProcessor();
+
+boolean result = processor.processPayment(null, 100);
+
+assertFalse(result);
 }
 }

@@ -54,4 +54,36 @@ boolean result = order.checkout(paymentMethod);
 assertTrue(result);
 }
 
+@Test
+void testCheckoutPassesCorrectOrderTotalToPaymentMethod() {
+Customer customer = new Customer(1, "Athi");
+Product product = new Product(1, "Laptop", 10000.00);
+
+Order order = new Order(1, customer);
+order.addItem(product, 2);
+
+TestPaymentMethod paymentMethod = new TestPaymentMethod();
+
+boolean result = order.checkout(paymentMethod);
+
+assertTrue(result);
+assertEquals(order.calculateTotal(),
+paymentMethod.amountReceived, 0.01);
+}
+
+static class TestPaymentMethod implements PaymentMethod {
+
+double amountReceived;
+
+@Override
+public boolean processPayment(double amount) {
+amountReceived = amount;
+return true;
+}
+
+@Override
+public String getPaymentType() {
+return "TEST";
+}
+}
 }

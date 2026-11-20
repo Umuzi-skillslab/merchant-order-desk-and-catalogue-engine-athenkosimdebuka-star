@@ -1,4 +1,4 @@
-
+import java.util.Scanner;
 
 public class PayNestApplication {
 
@@ -24,7 +24,34 @@ order.addItem(mouse, 2);
 order.printSummary();
 
 // Step 6: Select payment method
-PaymentMethod paymentMethod = new WalletPayment(20000.00);
+Scanner scanner = new Scanner(System.in);
+
+System.out.println("\nChoose your payment method:");
+System.out.println("1. Card");
+System.out.println("2. EFT");
+System.out.println("3. Wallet");
+System.out.print("Enter your choice: ");
+
+int choice = scanner.nextInt();
+
+PaymentMethod paymentMethod;
+
+switch (choice) {
+case 1:
+paymentMethod = new CardPayment("123");
+break;
+case 2:
+paymentMethod = new EftPayment();
+break;
+case 3:
+paymentMethod = new WalletPayment(20000.00);
+break;
+default:
+System.out.println("Invalid payment choice.");
+return;
+}
+
+scanner.close();
 
 // Step 7: Process payment through checkout
 boolean paymentSuccessful = order.checkout(paymentMethod);

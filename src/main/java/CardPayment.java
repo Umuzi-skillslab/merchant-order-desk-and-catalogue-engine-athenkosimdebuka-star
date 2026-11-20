@@ -1,7 +1,7 @@
 
 public class CardPayment implements PaymentMethod {
 
-private String cvv;
+private final String cvv;
 
 public CardPayment(String cvv) {
 this.cvv = cvv;
@@ -14,7 +14,8 @@ return "123".equals(cvv);
 @Override
 public boolean processPayment(double amount) {
 
-if (amount <= 0) {
+if (!Double.isFinite(amount) || amount <= 0) {
+System.out.println("Invalid payment amount.");
 return false;
 }
 

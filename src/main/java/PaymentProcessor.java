@@ -1,7 +1,14 @@
+
 public class PaymentProcessor {
 
 public boolean processPayment(PaymentMethod method, double amount) {
-    if (amount <= 0) {
+
+if (method == null) {
+System.out.println("Invalid payment method.");
+return false;
+}
+
+if (!Double.isFinite(amount) || amount <= 0) {
 System.out.println("Invalid payment amount.");
 return false;
 }

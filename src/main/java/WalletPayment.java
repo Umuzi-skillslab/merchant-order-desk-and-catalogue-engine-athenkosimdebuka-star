@@ -9,7 +9,7 @@ this.walletBalance = walletBalance;
 @Override
 public boolean processPayment(double amount) {
 
-if (amount <= 0) {
+if (!Double.isFinite(amount) || amount <= 0) {
 System.out.println("Invalid payment amount.");
 return false;
 }
